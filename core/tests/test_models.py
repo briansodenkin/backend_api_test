@@ -1,10 +1,9 @@
-from django.test import TestCase
 from django.contrib.auth import get_user_model
+from django.test import TestCase
 
 
 class ModelTests(TestCase):
-    """Test Customized User model
-    """
+    """Test Customized User model"""
 
     def test_create_user_with_email(self):
         """Test user can be created successfully"""
