@@ -17,6 +17,8 @@ from django.contrib import admin
 from django.urls import include, path
 from drf_spectacular.views import SpectacularAPIView, SpectacularSwaggerView
 
+from clinic.views import PhoneViewSet
+
 urlpatterns = [
     path("admin/", admin.site.urls),
     path("api/schema/", SpectacularAPIView.as_view(), name="api-schema"),
@@ -26,4 +28,6 @@ urlpatterns = [
         name="api-docs",
     ),
     path("user/", include("user.urls")),
+    path("clinic/", include("clinic.urls")),
+    path("phone/", PhoneViewSet.as_view({"get": "list"})),
 ]
