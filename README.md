@@ -1,2 +1,2 @@
 # backend_api_test
-[ER diagram](someimage.png)
+[ER diagram](Doctor_model-17.drawio.png)
