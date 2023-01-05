@@ -4,6 +4,8 @@ from django.utils.translation import gettext_lazy as _
 
 from core import models
 from district.models import District
+from clinic.models import Clinic, Phone
+from doctor.models import Doctor, Category
 
 
 class UserAdmin(BaseUserAdmin):
@@ -47,3 +49,7 @@ class UserAdmin(BaseUserAdmin):
 
 admin.site.register(models.User, UserAdmin)
 admin.site.register(District)
+admin.site.register(Clinic)
+admin.site.register(Phone)
+admin.site.register(Doctor)
+admin.site.register(Category)
