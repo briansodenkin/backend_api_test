@@ -2,10 +2,10 @@ from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
 from django.utils.translation import gettext_lazy as _
 
+from clinic.models import Clinic, Phone
 from core import models
 from district.models import District
-from clinic.models import Clinic, Phone
-from doctor.models import Doctor, Category
+from doctor.models import Category, Doctor
 
 
 class UserAdmin(BaseUserAdmin):

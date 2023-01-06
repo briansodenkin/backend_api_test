@@ -30,7 +30,7 @@ class ClinicSerializer(serializers.ModelSerializer):
             "phone_clinic",
         ]
 
-    def get_phone_clinic(self, obj):
+    def get_phone_clinic(self, obj) -> dict:
         phone_clinic = Phone.objects.filter(clinic=obj.clinic_id)
         serializer = PhoneSerializer(phone_clinic, many=True)
 

@@ -3,6 +3,7 @@ from django.test import TestCase
 
 from clinic.models import Clinic, Phone
 from district.models import District
+from doctor.models import Category, Doctor
 
 
 class ModelTests(TestCase):
@@ -77,12 +78,37 @@ class ModelTests(TestCase):
         )
         self.assertEqual(str(phone), str(phone.phone_number))
 
-    # def test_create_doctor(self):
-    #     """Test creating a recipe is successful."""
-    #     doctor = Doctor.objects.create(
-    #         title="Sample recipe name",
-    #         time_minutes=5,
-    #         price=Decimal("5.50"),
-    #     )
+    def test_create_doctor(self):
+        """Test creating a Doctor is successful."""
+        district = District.objects.create(
+            district_id=19,
+            district_name="dummy",
+        )
+        clinic = Clinic.objects.create(
+            clinic_name="Dummy clinic",
+            clinic_address="Dummy address",
+            district=district,
+        )
+        category = Category.objects.create(category_name="Dummy")
+        doctor = Doctor.objects.create(
+            first_name="Dummy First Name",
+            last_name="Dummy Last Name",
+            price=12123,
+            price_description="Dummy price",
+            exclu_price=12323,
+            availability={
+                "monday": "1000 - 1700",
+                "Tuesday": "1100 - 1800",
+            },
+            language=1,
+        )
+        doctor.category.add(category)
+        doctor.clinic.add(clinic)
+        doctor.save()
+        self.assertEqual(str(doctor), doctor.first_name + doctor.last_name)
 
-    #     self.assertEqual(str(doctor), doctor.title)
+    def test_create_category(self):
+        """Test creating a Category is successful."""
+        category = Category.objects.create(category_name="Dummy")
+
+        self.assertEqual(str(category), category.category_name)

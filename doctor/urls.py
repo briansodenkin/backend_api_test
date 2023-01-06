@@ -4,13 +4,13 @@ URL mappings for the Clinic app.
 from django.urls import include, path
 from rest_framework.routers import DefaultRouter
 
-from clinic import views
+from doctor import views
 
 router = DefaultRouter()
-router.register("", views.ClinicViewSet)
+router.register("", views.DoctorViewSet)
 
 
-app_name = "clinic"
+app_name = "doctor"
 
 urlpatterns = [
     path("", include(router.urls)),

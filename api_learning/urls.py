@@ -29,5 +29,9 @@ urlpatterns = [
     ),
     path("user/", include("user.urls")),
     path("clinic/", include("clinic.urls")),
-    path("phone/", PhoneViewSet.as_view({"get": "list"})),
+    path("doctor/", include("doctor.urls")),
+    path(
+        "phone/",
+        PhoneViewSet.as_view({"get": "list", "post": "update"}),
+    ),
 ]

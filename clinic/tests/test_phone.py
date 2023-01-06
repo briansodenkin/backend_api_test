@@ -1,6 +1,5 @@
-from collections import OrderedDict
-
 from django.test import TestCase
+from rest_framework.test import APIClient
 
 from clinic.models import Clinic, Phone
 from clinic.serializers import PhoneSerializer
@@ -37,6 +36,9 @@ def create_phone(**params):
 class PhoneTests(TestCase):
     """Test the get functions of the clinic model."""
 
+    def setUp(self):
+        self.client = APIClient()
+
     def test_get_phone(self):
         """Test get all the list of phone."""
         district = create_district()
@@ -45,10 +47,8 @@ class PhoneTests(TestCase):
         create_phone(phone_number=12345679, clinic=clinic)
         phone = Phone.objects.all()
         serializer = PhoneSerializer(phone, many=True)
-        expected = [
-            OrderedDict([("phone_id", 1), ("phone_number", 12345678), ("clinic", 1)]),
-            OrderedDict([("phone_id", 2), ("phone_number", 12345679), ("clinic", 1)]),
-        ]
-        self.assertEqual(expected, serializer.data)
+        res = self.client.get("http://127.0.0.1:8000/phone/")
+        for i in res.data:
+            self.assertIn(i, serializer.data)
 
     # Test for update, delete & create if api is exposed
